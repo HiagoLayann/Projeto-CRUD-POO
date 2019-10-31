@@ -152,7 +152,9 @@ public class TelaUsuario extends javax.swing.JFrame {
     }//GEN-LAST:event_tfLoginActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        // TODO add your handling code here:
+       TelaPesquisaUsuario tela = new TelaPesquisaUsuario(); 
+       tela.setVisible(true);
+       dispose();
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void tfSenhaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tfSenhaActionPerformed
