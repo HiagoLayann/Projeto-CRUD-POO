@@ -16,7 +16,12 @@ public class UsuarioDAO {
         sessao = HibernateUtil.getSessionFactory().openSession();
 
         trasacao = sessao.beginTransaction();
+        if(usuario.getIdUsuario()== 0){
         sessao.save(usuario);
+        }else{
+            editar(usuario);
+        }
+        
         trasacao.commit();
         sessao.clear();
     }
