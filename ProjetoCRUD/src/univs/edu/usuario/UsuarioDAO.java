@@ -16,12 +16,12 @@ public class UsuarioDAO {
         sessao = HibernateUtil.getSessionFactory().openSession();
 
         trasacao = sessao.beginTransaction();
-        if(usuario.getIdUsuario()== 0){
-        sessao.save(usuario);
-        }else{
+        if (usuario.getIdUsuario() == 0) {
+            sessao.save(usuario);
+        } else {
             editar(usuario);
         }
-        
+
         trasacao.commit();
         sessao.clear();
     }
@@ -43,18 +43,28 @@ public class UsuarioDAO {
         trasacao.commit();
         sessao.clear();
     }
-    
-        public Usuario pesquisar(int id) {
+
+    public Usuario pesquisar(int id) {
         sessao = HibernateUtil.getSessionFactory().openSession();
         trasacao = sessao.beginTransaction();
         Usuario usuario = (Usuario) sessao.createCriteria(Usuario.class).add(Restrictions.eq("idUsuario", id)).uniqueResult();
         sessao.close();
         return usuario;
     }
-        
-                public List<Usuario> listarUsuarios () {
+
+    public Usuario autenticarUsuario(String login, String senha) {
         sessao = HibernateUtil.getSessionFactory().openSession();
-        trasacao = sessao.beginTransaction(); List<Usuario> usuario = sessao.createCriteria(Usuario.class).list();
+        trasacao = sessao.beginTransaction();
+        Usuario usuario = (Usuario) sessao.createCriteria(Usuario.class).add(Restrictions.eq("login",login)).add(Restrictions.eq("senha",senha)).uniqueResult();
+        sessao.close();
+       
+        return usuario != null ? usuario : null; 
+    }
+
+    public List<Usuario> listarUsuarios() {
+        sessao = HibernateUtil.getSessionFactory().openSession();
+        trasacao = sessao.beginTransaction();
+        List<Usuario> usuario = sessao.createCriteria(Usuario.class).list();
         sessao.close();
         return usuario;
     }
