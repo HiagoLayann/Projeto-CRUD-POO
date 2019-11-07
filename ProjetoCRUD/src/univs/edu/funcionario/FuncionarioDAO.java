@@ -1,6 +1,6 @@
-package univs.edu.usuario;
+package univs.edu.funcionario;
 
-import java.util.ArrayList;
+import univs.edu.usuario.*;
 import java.util.List;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
@@ -8,75 +8,61 @@ import org.hibernate.criterion.Restrictions;
 import univs.edu.util.HibernateUtil;
 
 
-public class UsuarioDAO {
+public class FuncionarioDAO {
     private Session sessao;
     private Transaction transacao;
     
-    public void salvar(Usuario usuario){
+    public void salvar(Funcionario funcionario){
         sessao = HibernateUtil.
                 getSessionFactory().openSession();
         transacao = sessao.beginTransaction();
-        if(usuario.getIdUsuario() == 0){
-            sessao.save(usuario);
+        if(funcionario.getIdFuncionario()== 0){
+            sessao.save(funcionario);
         }else{
-            editar(usuario);
+            editar(funcionario);
         }
         transacao.commit();
         sessao.close();
     }
     
-    public void excluir(Usuario usuario){
+    public void excluir(Funcionario funcionario){
         sessao = HibernateUtil.
                 getSessionFactory().openSession();
         transacao = sessao.beginTransaction();
-        sessao.delete(usuario);
+        sessao.delete(funcionario);
         transacao.commit();
         sessao.close();
     }
     
-    public void editar(Usuario usuario){
+    public void editar(Funcionario funcionario){
         sessao = HibernateUtil.
                 getSessionFactory().openSession();
         transacao = sessao.beginTransaction();
-        sessao.update(usuario);
+        sessao.update(funcionario);
         transacao.commit();
         sessao.close();
     }
     
-    public Usuario pesquisar(int id){
+    public Funcionario pesquisar(int id){
         sessao = HibernateUtil.
                 getSessionFactory().openSession();
         transacao = sessao.beginTransaction();
-        Usuario usuario = (Usuario) sessao.
+        Funcionario funcionario = (Funcionario) sessao.
                 createCriteria(Usuario.class)
-                .add(Restrictions.eq("idUsuario", id))
+                .add(Restrictions.eq("idFuncionario", id))
                 .uniqueResult();
         sessao.close();
-        return usuario;
+        return funcionario;
     }
     
-    public Usuario autenticarUsuario(String login, String senha){
+    public List<Funcionario> listarFuncionarios(){
         sessao = HibernateUtil.
                 getSessionFactory().openSession();
         transacao = sessao.beginTransaction();
-        Usuario usuario = (Usuario) sessao.
-                createCriteria(Usuario.class)
-                .add(Restrictions.eq("login", login))
-                .add(Restrictions.eq("senha", senha))
-                .uniqueResult();
+        List<Funcionario> funcionarios = sessao.
+                createCriteria(Funcionario.class).list();
         sessao.close();
-        
-        return usuario != null ? usuario : null;
-    }
-    
-    public List<Usuario> listarUsuarios(){
-        sessao = HibernateUtil.
-                getSessionFactory().openSession();
-        transacao = sessao.beginTransaction();
-        List<Usuario> usuarios = sessao.
-                createCriteria(Usuario.class).list();
-        sessao.close();
-        return usuarios;
+        return funcionarios;
     }
     
 }
