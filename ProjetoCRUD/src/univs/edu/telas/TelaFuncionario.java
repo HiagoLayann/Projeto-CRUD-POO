@@ -14,15 +14,16 @@ import univs.edu.usuario.Usuario;
  * @author LABORATORIO 01
  */
 public class TelaFuncionario extends javax.swing.JFrame {
-
-   Funcionario funcionario = new Funcionario();
-   FuncionarioDAO dao = new FuncionarioDAO();
+    
+    Funcionario funcionario = new Funcionario();
+    FuncionarioDAO dao = new FuncionarioDAO();
+    
     public TelaFuncionario() {
         initComponents();
-
+        
     }
-   
-    public void limparCampos(){
+    
+    public void limparCampos() {
         funcionario = new Funcionario();
         tfNome.setText("");
         tfSalario.setText("");
@@ -30,14 +31,12 @@ public class TelaFuncionario extends javax.swing.JFrame {
         tfCpf.setText("");
         jcCargo.setSelectedItem("Selecione");
     }
-
-    public void carregarUsuario(Usuario usuario){
+    
+    public void carregarUsuario(Usuario usuario) {
         funcionario.setUsuario(usuario);
         tfUsuario.setText(usuario.getLogin());
     }
-    
-    
-        
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -89,7 +88,7 @@ public class TelaFuncionario extends javax.swing.JFrame {
         jLabel6.setText("Cargo.:");
 
         jcCargo.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
-        jcCargo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Administrador", "Recursos Humanos" }));
+        jcCargo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Selecione", "Administrador", "Recursos Humanos" }));
         jcCargo.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jcCargoActionPerformed(evt);
@@ -102,7 +101,7 @@ public class TelaFuncionario extends javax.swing.JFrame {
         jLabel7.setFont(new java.awt.Font("Lucida Grande", 1, 14)); // NOI18N
         jLabel7.setText("Usuário.:");
 
-        jButton2.setFont(new java.awt.Font("Tahoma", 1, 10)); // NOI18N
+        jButton2.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jButton2.setText("Selecionar..");
         jButton2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -111,8 +110,13 @@ public class TelaFuncionario extends javax.swing.JFrame {
         });
 
         jButton3.setText("Salvar");
+        jButton3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton3ActionPerformed(evt);
+            }
+        });
 
-        jButton4.setText("voltar");
+        jButton4.setText("Voltar");
 
         jButton5.setText("Limpar");
         jButton5.addActionListener(new java.awt.event.ActionListener() {
@@ -130,26 +134,22 @@ public class TelaFuncionario extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(14, 14, 14)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addContainerGap()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addComponent(jLabel6)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(jLabel4)
+                                    .addComponent(jLabel3)))
                             .addGroup(layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabel5)
-                                    .addComponent(jLabel6)
-                                    .addComponent(jLabel3)
-                                    .addComponent(jLabel4))
-                                .addGap(10, 10, 10)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                    .addComponent(tfCpf, javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jcCargo, javax.swing.GroupLayout.Alignment.LEADING, 0, 238, Short.MAX_VALUE)
-                                    .addComponent(tfSalario, javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(tfNome)))
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(jLabel7)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(tfUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, 238, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(jButton2))))
+                                .addComponent(jLabel5)
+                                .addGap(3, 3, 3)))
+                        .addGap(15, 15, 15)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                            .addComponent(tfCpf, javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jcCargo, javax.swing.GroupLayout.Alignment.LEADING, 0, 238, Short.MAX_VALUE)
+                            .addComponent(tfSalario, javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(tfNome)))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(58, 58, 58)
                         .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -163,8 +163,15 @@ public class TelaFuncionario extends javax.swing.JFrame {
                         .addGap(18, 18, 18)
                         .addComponent(jButton3)
                         .addGap(18, 18, 18)
-                        .addComponent(jButton6)))
-                .addContainerGap(21, Short.MAX_VALUE))
+                        .addComponent(jButton6))
+                    .addGroup(layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(jLabel7)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(tfUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, 238, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(jButton2)))
+                .addContainerGap(33, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -189,11 +196,11 @@ public class TelaFuncionario extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jcCargo, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel6))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 45, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(tfUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel7)
-                    .addComponent(jButton2))
+                    .addComponent(jButton2)
+                    .addComponent(jLabel7))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButton3)
@@ -204,6 +211,7 @@ public class TelaFuncionario extends javax.swing.JFrame {
         );
 
         pack();
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
     private void jcCargoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jcCargoActionPerformed
@@ -211,12 +219,29 @@ public class TelaFuncionario extends javax.swing.JFrame {
     }//GEN-LAST:event_jcCargoActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        // TODO add your handling code here:
+        TelaVincularUsuario tela = new TelaVincularUsuario(this);
+        tela.setVisible(true);
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
         limparCampos();
     }//GEN-LAST:event_jButton5ActionPerformed
+
+    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+        if (!tfNome.getText().isEmpty() 
+                && !tfCpf.getText().isEmpty() 
+                && !tfSalario.getText().isEmpty() 
+                && !tfUsuario.getText().isEmpty() 
+                && !jcCargo.getSelectedItem().equals("Selecione")) {
+            
+            funcionario.setCargo(String.valueOf(jcCargo.getSelectedItem()));
+            funcionario.setCpf(tfCpf.getText());
+            funcionario.setNomeFuncionario(tfNome.getText());
+            funcionario.setSalario(Double.parseDouble(tfSalario.getText()));
+            
+        }
+
+    }//GEN-LAST:event_jButton3ActionPerformed
 
     /**
      * @param args the command line arguments
