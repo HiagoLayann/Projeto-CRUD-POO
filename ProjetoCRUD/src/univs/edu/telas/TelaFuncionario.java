@@ -5,6 +5,7 @@
  */
 package univs.edu.telas;
 
+import javax.swing.JOptionPane;
 import univs.edu.funcionario.Funcionario;
 import univs.edu.funcionario.FuncionarioDAO;
 import univs.edu.usuario.Usuario;
@@ -14,15 +15,15 @@ import univs.edu.usuario.Usuario;
  * @author LABORATORIO 01
  */
 public class TelaFuncionario extends javax.swing.JFrame {
-    
+
     Funcionario funcionario = new Funcionario();
     FuncionarioDAO dao = new FuncionarioDAO();
-    
+
     public TelaFuncionario() {
         initComponents();
-        
+
     }
-    
+
     public void limparCampos() {
         funcionario = new Funcionario();
         tfNome.setText("");
@@ -31,7 +32,14 @@ public class TelaFuncionario extends javax.swing.JFrame {
         tfCpf.setText("");
         jcCargo.setSelectedItem("Selecione");
     }
-    
+    public void preencherFuncionario(){
+        tfNome.setText(funcionario.getNomeFuncionario());
+        tfCpf.setText(funcionario.getCpf());
+        tfSalario.setText(String.valueOf(funcionario.getSalario()));
+        tfUsuario.setText(funcionario.getUsuario().getLogin());
+        jcCargo.setSelectedItem(funcionario.getCargo());
+    }
+
     public void carregarUsuario(Usuario usuario) {
         funcionario.setUsuario(usuario);
         tfUsuario.setText(usuario.getLogin());
@@ -228,17 +236,21 @@ public class TelaFuncionario extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton5ActionPerformed
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
-        if (!tfNome.getText().isEmpty() 
-                && !tfCpf.getText().isEmpty() 
-                && !tfSalario.getText().isEmpty() 
-                && !tfUsuario.getText().isEmpty() 
+        if (       !tfNome.getText().isEmpty()
+                && !tfCpf.getText().isEmpty()
+                && !tfSalario.getText().isEmpty()
+                && !tfUsuario.getText().isEmpty()
                 && !jcCargo.getSelectedItem().equals("Selecione")) {
-            
+
             funcionario.setCargo(String.valueOf(jcCargo.getSelectedItem()));
             funcionario.setCpf(tfCpf.getText());
             funcionario.setNomeFuncionario(tfNome.getText());
             funcionario.setSalario(Double.parseDouble(tfSalario.getText()));
-            
+            dao.salvar(funcionario);
+            limparCampos();
+        } else {
+            JOptionPane.showMessageDialog(null, "Preencha todos os campos!");
+
         }
 
     }//GEN-LAST:event_jButton3ActionPerformed

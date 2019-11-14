@@ -2,30 +2,34 @@ package univs.edu.funcionario;
 
 import univs.edu.usuario.*;
 import java.util.List;
+import javax.swing.JOptionPane;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 import org.hibernate.criterion.Restrictions;
 import univs.edu.util.HibernateUtil;
 
-
 public class FuncionarioDAO {
+
     private Session sessao;
     private Transaction transacao;
-    
-    public void salvar(Funcionario funcionario){
+
+    public void salvar(Funcionario funcionario) {
         sessao = HibernateUtil.
                 getSessionFactory().openSession();
         transacao = sessao.beginTransaction();
-        if(funcionario.getIdFuncionario()== 0){
+        if (funcionario.getIdFuncionario() == 0) {
             sessao.save(funcionario);
-        }else{
+            JOptionPane.showMessageDialog(null, "Funcionario Cadastrado!");
+        } else {
             editar(funcionario);
+            JOptionPane.showMessageDialog(null, "Funcionario Editado!");
+
         }
         transacao.commit();
         sessao.close();
     }
-    
-    public void excluir(Funcionario funcionario){
+
+    public void excluir(Funcionario funcionario) {
         sessao = HibernateUtil.
                 getSessionFactory().openSession();
         transacao = sessao.beginTransaction();
@@ -33,8 +37,8 @@ public class FuncionarioDAO {
         transacao.commit();
         sessao.close();
     }
-    
-    public void editar(Funcionario funcionario){
+
+    public void editar(Funcionario funcionario) {
         sessao = HibernateUtil.
                 getSessionFactory().openSession();
         transacao = sessao.beginTransaction();
@@ -42,8 +46,8 @@ public class FuncionarioDAO {
         transacao.commit();
         sessao.close();
     }
-    
-    public Funcionario pesquisar(int id){
+
+    public Funcionario pesquisar(int id) {
         sessao = HibernateUtil.
                 getSessionFactory().openSession();
         transacao = sessao.beginTransaction();
@@ -54,8 +58,8 @@ public class FuncionarioDAO {
         sessao.close();
         return funcionario;
     }
-    
-    public List<Funcionario> listarFuncionarios(){
+
+    public List<Funcionario> listarFuncionarios() {
         sessao = HibernateUtil.
                 getSessionFactory().openSession();
         transacao = sessao.beginTransaction();
@@ -64,5 +68,5 @@ public class FuncionarioDAO {
         sessao.close();
         return funcionarios;
     }
-    
+
 }
