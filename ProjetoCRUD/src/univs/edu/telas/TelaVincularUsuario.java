@@ -29,10 +29,6 @@ public class TelaVincularUsuario extends javax.swing.JFrame {
         tela.setVisible(false);
         atualizarTabela();
     }
-
-    private TelaVincularUsuario() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
     
     public void atualizarTabela(){
         UsuarioTableModel tm = 
@@ -40,10 +36,10 @@ public class TelaVincularUsuario extends javax.swing.JFrame {
         tabelaUsuario.setModel(tm);
     }
     
-    public void vincularUsuario( Usuario usuario){
+    public void vincularUsuario(Usuario usuario){
         tela.carregarUsuario(usuario);
-        
     }
+    
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -83,7 +79,6 @@ public class TelaVincularUsuario extends javax.swing.JFrame {
         });
         jScrollPane1.setViewportView(tabelaUsuario);
 
-        btSelecionar.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         btSelecionar.setText("Selecionar");
         btSelecionar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -106,30 +101,29 @@ public class TelaVincularUsuario extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addGap(0, 107, Short.MAX_VALUE)
+                        .addGap(0, 0, Short.MAX_VALUE)
                         .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 189, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(116, 116, 116))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addComponent(jButton4)
-                        .addGap(94, 94, 94)
-                        .addComponent(btSelecionar)
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 399, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 399, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jButton4)
+                                .addGap(72, 72, 72)
+                                .addComponent(btSelecionar)))
+                        .addContainerGap(9, Short.MAX_VALUE))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, 53, Short.MAX_VALUE)
-                .addGap(18, 18, 18)
+                .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, 38, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 275, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btSelecionar)
                     .addComponent(jButton4))
-                .addGap(11, 11, 11))
+                .addContainerGap())
         );
 
         pack();
@@ -140,12 +134,11 @@ public class TelaVincularUsuario extends javax.swing.JFrame {
         if(linha == -1){
             JOptionPane.showMessageDialog(null, "Selecione uma linha!");
         }else{
-            usuario = dao.pesquisar((int)tabelaUsuario.getValueAt(linha, 0));
-        tela.carregarUsuario(usuario);
+            usuario = dao.pesquisar((int) tabelaUsuario.getValueAt(linha, 0));
+            tela.carregarUsuario(usuario);
             tela.setVisible(true);
             dispose();
         }
-        
         
     }//GEN-LAST:event_btSelecionarActionPerformed
 
@@ -185,8 +178,6 @@ public class TelaVincularUsuario extends javax.swing.JFrame {
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
             java.util.logging.Logger.getLogger(TelaVincularUsuario.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
-        //</editor-fold>
-        //</editor-fold>
         //</editor-fold>
         //</editor-fold>
 

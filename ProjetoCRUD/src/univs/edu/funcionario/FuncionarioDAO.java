@@ -8,28 +8,27 @@ import org.hibernate.Transaction;
 import org.hibernate.criterion.Restrictions;
 import univs.edu.util.HibernateUtil;
 
-public class FuncionarioDAO {
 
+public class FuncionarioDAO {
     private Session sessao;
     private Transaction transacao;
-
-    public void salvar(Funcionario funcionario) {
+    
+    public void salvar(Funcionario funcionario){
         sessao = HibernateUtil.
                 getSessionFactory().openSession();
         transacao = sessao.beginTransaction();
-        if (funcionario.getIdFuncionario() == 0) {
+        if(funcionario.getIdFuncionario()== 0){
             sessao.save(funcionario);
-            JOptionPane.showMessageDialog(null, "Funcionario Cadastrado!");
-        } else {
+            JOptionPane.showMessageDialog(null, "Funcionário Cadastrado!");
+        }else{
             editar(funcionario);
-            JOptionPane.showMessageDialog(null, "Funcionario Editado!");
-
+            JOptionPane.showMessageDialog(null, "Funcionário Editado!");
         }
         transacao.commit();
         sessao.close();
     }
-
-    public void excluir(Funcionario funcionario) {
+    
+    public void excluir(Funcionario funcionario){
         sessao = HibernateUtil.
                 getSessionFactory().openSession();
         transacao = sessao.beginTransaction();
@@ -37,8 +36,8 @@ public class FuncionarioDAO {
         transacao.commit();
         sessao.close();
     }
-
-    public void editar(Funcionario funcionario) {
+    
+    public void editar(Funcionario funcionario){
         sessao = HibernateUtil.
                 getSessionFactory().openSession();
         transacao = sessao.beginTransaction();
@@ -46,20 +45,20 @@ public class FuncionarioDAO {
         transacao.commit();
         sessao.close();
     }
-
-    public Funcionario pesquisar(int id) {
+    
+    public Funcionario pesquisar(int id){
         sessao = HibernateUtil.
                 getSessionFactory().openSession();
         transacao = sessao.beginTransaction();
         Funcionario funcionario = (Funcionario) sessao.
-                createCriteria(Usuario.class)
+                createCriteria(Funcionario.class)
                 .add(Restrictions.eq("idFuncionario", id))
                 .uniqueResult();
         sessao.close();
         return funcionario;
     }
-
-    public List<Funcionario> listarFuncionarios() {
+    
+    public List<Funcionario> listarFuncionarios(){
         sessao = HibernateUtil.
                 getSessionFactory().openSession();
         transacao = sessao.beginTransaction();
@@ -68,5 +67,19 @@ public class FuncionarioDAO {
         sessao.close();
         return funcionarios;
     }
-
+    
+    public Funcionario autenticarFuncionario(String login, String senha){
+        sessao = HibernateUtil.
+                getSessionFactory().openSession();
+        transacao = sessao.beginTransaction();
+        Funcionario funcionario = (Funcionario) sessao.
+                createCriteria(Funcionario.class)
+                .add(Restrictions.eq("usuario.login", login))
+                .add(Restrictions.eq("usuario.senha", senha))
+                .uniqueResult();
+        sessao.close();
+        
+        return funcionario != null ? funcionario : null;
+    }
+    
 }
